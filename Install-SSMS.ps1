@@ -2,7 +2,7 @@
 
 $tempDir = "C:\Temp"
 $url = "https://aka.ms/ssms/22/release/vs_SSMS.exe"
-$output = "$tempDir\SSMS-Setup.exe"
+$output = "$tempDir\vs_SSMS.exe"
 
 # Ensure Temp folder exists
 if (!(Test-Path -Path $tempDir)) {
