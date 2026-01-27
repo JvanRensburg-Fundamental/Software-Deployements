@@ -1,7 +1,7 @@
 # install-npp.ps1
 
-$InstallerPath = "C:\Temp\npp.8.9.Installer.x64.msi"
-$InstallerUrl = "https://raw.githubusercontent.com/JvanRensburg-Fundamental/Software-Deployements/073c2136019a541086de8324d34a25d051bb5248/npp.8.9.Installer.x64.msi"
+$InstallerUrl = "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.9.1/npp.8.9.1.Installer.x64.msi"
+$InstallerPath = "C:\Temp\npp.8.9.1.Installer.x64.msi"
 
 # Ensure Temp folder exists
 if (!(Test-Path -Path "C:\Temp")) {
