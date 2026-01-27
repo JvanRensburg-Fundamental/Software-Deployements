@@ -1,5 +1,5 @@
-$InstallerUrl = "https://sourceforge.net/projects/tortoisesvn/files/1.14.9/Application/TortoiseSVN-1.14.9.29743-x64-svn-1.14.5.msi/download"
-$InstallerPath = "C:\Temp\TortoiseSVN.msi"
+$InstallerUrl = "https://www.filehorse.com/download/file/9MxDVowrq2m3OGZe5ovTkH8nGpywzG2EHdRRpec0FUtu4l6oDuFwIZTVWVJmiqeFgRUNYv5V2Utw2_jDNo23UC5r8IXKHY6ymO-jrviBz-I/"
+$InstallerPath = "C:\Temp\TortoiseSVN-1.14.9.29743-x64-svn-1.14.5.msi"
 
 # Ensure Temp folder exists
 if (!(Test-Path -Path "C:\Temp")) {
