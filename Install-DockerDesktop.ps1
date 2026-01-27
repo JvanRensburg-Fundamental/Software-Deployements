@@ -2,7 +2,7 @@
 
 $tempDir = "C:\Temp"
 $url = "https://desktop.docker.com/win/stable/Docker%20Desktop%20Installer.exe"
-$output = "$tempDir\DockerDesktopInstaller.exe"
+$output = "$tempDir\Docker Desktop Installer.exe"
 
 # Ensure Temp folder exists
 if (!(Test-Path -Path $tempDir)) {
