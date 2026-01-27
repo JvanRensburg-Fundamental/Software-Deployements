@@ -6,9 +6,6 @@ Write-Host "Enabling WSL and Virtual Machine Platform..." -ForegroundColor Cyan
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 
-# Set WSL2 as default
-wsl --set-default-version 2
-
 # Prepare temp directory
 $tempDir = "C:\Temp"
 if (!(Test-Path -Path $tempDir)) {
