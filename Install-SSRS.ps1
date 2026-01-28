@@ -14,16 +14,16 @@ $VerbosePreference = "Continue"
 #  DEFINE YOUR VARIABLES HERE
 # ------------------------------------------
 $AppName            = "SQL Server Reporting Services"      
-$InstallerUrl       = "https://download.microsoft.com/download/1/8/0/180f0e0c-0f0c-4c0a-8f0c-0f0c0f0c0f0c/SQLServerReportingServices.exe"
+$InstallerUrl       = "https://download.microsoft.com/download/8/3/2/832616ff-af64-42b5-a0b1-5eb07f71dec9/SQLServerReportingServices.exe"
 $InstallerPath      = "C:\Temp\SSRS-Setup.exe"   
 $SilentArgs         = "/quiet /norestart /IAcceptLicenseTerms"      
-$CreateShortcut     = $true 
-$AppExecutablePath  = "C:\Program Files\Microsoft SQL Server Reporting Services\SSRS\ReportServer\RSConfigTool.exe"
+$CreateShortcut     = $false 
+$AppExecutablePath  = ""
     
-
 # ------------------------------------------
 #  VALIDATE VARIABLES
 # ------------------------------------------
+
 if ([string]::IsNullOrWhiteSpace($AppName)) {
     Write-Host "ERROR: AppName is not defined."
     exit 1
@@ -127,6 +127,7 @@ try {
     # ------------------------------------------
     #  CLEANUP
     # ------------------------------------------
+
     if (Test-Path $InstallerPath) {
         Write-Log "Cleaning up installer"
         Remove-Item -Path $InstallerPath -Force
