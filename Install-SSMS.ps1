@@ -1,22 +1,141 @@
-# Install-SSMS.ps1
+# ==========================================
+#  Universal App Installer Template
+#  Logs in C:\Temp\AppLogs
+#  ErrorActionPreference = Continue
+#  Deterministic exit codes
+#  Optional Desktop Shortcut Creation
+# ==========================================
 
-$tempDir = "C:\Temp"
-$url = "https://aka.ms/ssms/22/release/vs_SSMS.exe"
-$output = "$tempDir\vs_SSMS.exe"
+Set-StrictMode -Version Latest
+$ErrorActionPreference = "Continue"
+$VerbosePreference = "Continue"
 
-# Ensure Temp folder exists
-if (!(Test-Path -Path $tempDir)) {
-    New-Item -Path $tempDir -ItemType Directory -Force
+# ------------------------------------------
+#  DEFINE YOUR VARIABLES HERE
+# ------------------------------------------
+$AppName            = "SQL Server Management Studio"   
+$InstallerUrl       = "https://aka.ms/ssmsfullsetup"      
+$InstallerPath      = "C:\Temp\SSMS-Setup.exe"      
+$SilentArgs         = "/quiet /norestart /IAcceptLicenseTerms"      
+$CreateShortcut     = $true
+$AppExecutablePath  = "C:\Program Files (x86)\Microsoft SQL Server Management Studio 20\Common7\IDE\Ssms.exe"
+
+# ------------------------------------------
+#  VALIDATE VARIABLES
+# ------------------------------------------
+if ([string]::IsNullOrWhiteSpace($AppName)) {
+    Write-Host "ERROR: AppName is not defined."
+    exit 1
 }
 
-# Allow CDN redirect to settle
-Start-Sleep -Seconds 10
+if ([string]::IsNullOrWhiteSpace($InstallerPath)) {
+    Write-Host "ERROR: InstallerPath is not defined."
+    exit 1
+}
 
-# Download installer
-Invoke-WebRequest -Uri $url -OutFile $output
+# ------------------------------------------
+#  PREPARE LOGGING
+# ------------------------------------------
+if (!(Test-Path -Path "C:\Temp")) {
+    New-Item -Path "C:\Temp" -ItemType Directory -Force | Out-Null
+}
 
-# Install silently
-Start-Process -FilePath $output -ArgumentList "/install /quiet /norestart" -Wait
+$LogPath = "C:\Temp\AppLogs"
+if (!(Test-Path $LogPath)) {
+    New-Item -Path $LogPath -ItemType Directory -Force | Out-Null
+}
 
-# Cleanup
-Remove-Item -Path $output -Force
+$LogFile = Join-Path $LogPath "AppInstall-$($AppName)-$(Get-Date -Format 'yyyyMMdd-HHmmss').log"
+
+function Write-Log {
+    param([string]$Message)
+    $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    "$timestamp  $Message" | Tee-Object -FilePath $LogFile -Append
+}
+
+Write-Log "=== Starting installation for $AppName ==="
+
+try {
+    # ------------------------------------------
+    #  DOWNLOAD INSTALLER (if URL provided)
+    # ------------------------------------------
+    if ($InstallerUrl) {
+        Write-Log "Downloading installer from $InstallerUrl"
+        Invoke-WebRequest -Uri $InstallerUrl -OutFile $InstallerPath -UseBasicParsing
+
+        if (!(Test-Path $InstallerPath)) {
+            Write-Log "ERROR: Installer failed to download"
+            exit 1
+        }
+
+        Write-Log "Installer downloaded successfully"
+    }
+
+    # ------------------------------------------
+    #  INSTALL MSI
+    # ------------------------------------------
+    if ($InstallerPath -like "*.msi") {
+        Write-Log "Running MSI installer for $AppName"
+        $process = Start-Process msiexec.exe -ArgumentList "/i `"$InstallerPath`" /qn /norestart ALLUSERS=1" -Wait -PassThru
+        Write-Log "MSI exit code: $($process.ExitCode)"
+
+        if ($process.ExitCode -ne 0) {
+            Write-Log "ERROR: MSI installer failed"
+            exit 1
+        }
+    }
+
+    # ------------------------------------------
+    #  INSTALL EXE
+    # ------------------------------------------
+    if ($InstallerPath -like "*.exe") {
+        Write-Log "Running EXE installer for $AppName"
+        $process = Start-Process -FilePath $InstallerPath -ArgumentList $SilentArgs -Wait -PassThru
+        Write-Log "EXE exit code: $($process.ExitCode)"
+
+        if ($process.ExitCode -ne 0) {
+            Write-Log "ERROR: EXE installer failed"
+            exit 1
+        }
+    }
+
+    # ------------------------------------------
+    #  CREATE DESKTOP SHORTCUT (optional)
+    # ------------------------------------------
+    if ($CreateShortcut -and -not [string]::IsNullOrWhiteSpace($AppExecutablePath)) {
+        Write-Log "Creating desktop shortcut for $AppName"
+
+        $ShortcutPath = "C:\Users\Public\Desktop\$AppName.lnk"
+
+        try {
+            $WScriptShell = New-Object -ComObject WScript.Shell
+            $Shortcut = $WScriptShell.CreateShortcut($ShortcutPath)
+            $Shortcut.TargetPath = $AppExecutablePath
+            $Shortcut.WorkingDirectory = Split-Path $AppExecutablePath
+            $Shortcut.WindowStyle = 1
+            $Shortcut.IconLocation = $AppExecutablePath
+            $Shortcut.Save()
+
+            Write-Log "Shortcut created at $ShortcutPath"
+        }
+        catch {
+            Write-Log "ERROR: Failed to create shortcut - $($_.Exception.Message)"
+        }
+    }
+
+    # ------------------------------------------
+    #  CLEANUP
+    # ------------------------------------------
+    if (Test-Path $InstallerPath) {
+        Write-Log "Cleaning up installer"
+        Remove-Item -Path $InstallerPath -Force
+    }
+
+    Write-Log "=== Installation completed successfully for $AppName ==="
+    exit 0
+}
+catch {
+    Write-Log "ERROR: $($_.Exception.Message)"
+    Write-Log "=== Script failed for $AppName ==="
+    exit 1
+}
