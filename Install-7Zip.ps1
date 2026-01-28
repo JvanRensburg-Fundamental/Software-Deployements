@@ -36,11 +36,11 @@ try {
     # ----------------------------
     #  DEFINE YOUR VARIABLES HERE
     # ----------------------------
-    # Example:
-    # $AppName       = "7-Zip"
-    # $InstallerUrl  = "https://www.7-zip.org/a/7z2501-x64.msi"
-    # $InstallerPath = "C:\Temp\7z2501-x64.msi"
-    # $SilentArgs    = "/S"   # for EXE installers
+ 
+    $AppName       = "7-Zip"
+    $InstallerUrl  = "https://www.7-zip.org/a/7z2501-x64.msi"
+    $InstallerPath = "C:\Temp\7z2501-x64.msi"
+    $$SilentArgs    = "/S"   # for EXE installers
 
     Write-Log "Preparing to install $AppName"
 
