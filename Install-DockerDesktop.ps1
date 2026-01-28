@@ -16,7 +16,7 @@ $VerbosePreference = "Continue"
 $AppName            = "Docker Desktop"      
 $InstallerUrl       = "https://desktop.docker.com/win/stable/Docker%20Desktop%20Installer.exe"      
 $InstallerPath      = "Docker Desktop Installer.exe"     
-$SilentArgs         = "/s"      
+$SilentArgs         = "install --quiet --accept-license --noreboot"      
 $CreateShortcut     = $true 
 $AppExecutablePath = "C:\Program Files\Docker\Docker\Docker Desktop.exe"
 
