@@ -13,12 +13,12 @@ $VerbosePreference = "Continue"
 # ------------------------------------------
 #  DEFINE YOUR VARIABLES HERE
 # ------------------------------------------
-$AppName            = ""      # e.g. "7-Zip"
-$InstallerUrl       = ""      # e.g. "https://example.com/app.msi"
-$InstallerPath      = ""      # e.g. "C:\Temp\app.msi"
-$SilentArgs         = ""      # e.g. "/S" for EXE installers
-$CreateShortcut     = $false  # Set to $true to create desktop shortcut
-$AppExecutablePath  = ""      # e.g. "C:\Program Files\7-Zip\7zFM.exe"
+$AppName            = ""      
+$InstallerUrl       = ""      
+$InstallerPath      = ""      
+$SilentArgs         = ""      
+$CreateShortcut     = $false 
+$AppExecutablePath  = ""      
 
 # ------------------------------------------
 #  VALIDATE VARIABLES

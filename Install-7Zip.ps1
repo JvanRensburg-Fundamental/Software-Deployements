@@ -13,12 +13,12 @@ $VerbosePreference = "Continue"
 # ------------------------------------------
 #  DEFINE YOUR VARIABLES HERE
 # ------------------------------------------
-$AppName            = "7-Zip"      # e.g. "7-Zip"
-$InstallerUrl       = "https://www.7-zip.org/a/7z2501-x64.msi"      # e.g. ""
-$InstallerPath      = "c:\temp\7z2501-x64.msi"      # e.g. ""
-$SilentArgs         = ""      # e.g. "/S" for EXE installers
-$CreateShortcut     = $false  # Set to $true to create desktop shortcut
-$AppExecutablePath  = ""      # e.g. "C:\Program Files\7-Zip\7zFM.exe"
+$AppName            = "7-Zip"    
+$InstallerUrl       = "https://www.7-zip.org/a/7z2501-x64.msi"   
+$InstallerPath      = "c:\temp\7z2501-x64.msi"  
+$SilentArgs         = ""     
+$CreateShortcut     = $false  
+$AppExecutablePath  = ""    
 
 # ------------------------------------------
 #  VALIDATE VARIABLES
@@ -36,6 +36,7 @@ if ([string]::IsNullOrWhiteSpace($InstallerPath)) {
 # ------------------------------------------
 #  PREPARE LOGGING
 # ------------------------------------------
+
 if (!(Test-Path -Path "C:\Temp")) {
     New-Item -Path "C:\Temp" -ItemType Directory -Force | Out-Null
 }
