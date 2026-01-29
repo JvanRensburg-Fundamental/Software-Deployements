@@ -16,7 +16,7 @@ $VerbosePreference = "Continue"
 $AppName            = "SQL Server Reporting Services"      
 $InstallerUrl       = "https://download.microsoft.com/download/8/3/2/832616ff-af64-42b5-a0b1-5eb07f71dec9/SQLServerReportingServices.exe"
 $InstallerPath      = "C:\Temp\SSRS-Setup.exe"   
-$SilentArgs         = "/quiet /norestart /IAcceptLicenseTerms"      
+$SilentArgs         = "/quiet /norestart /IAcceptLicenseTerms REBOOT=ReallySuppress"      
 $CreateShortcut     = $false 
 $AppExecutablePath  = ""
     
