@@ -79,6 +79,12 @@ try {
         $process = Start-Process msiexec.exe -ArgumentList "/i `"$InstallerPath`" /qn /norestart ALLUSERS=1 REBOOT=ReallySuppress" -Wait -PassThru
         Write-Log "MSI exit code: $($process.ExitCode)"
 
+    # Normalize reboot-required success codes
+    if ($process.ExitCode -eq 3010 -or $process.ExitCode -eq 1641) {
+        Write-Log "Installer completed successfully and requires a reboot"
+        exit 0
+    }
+
         if ($process.ExitCode -ne 0) {
             Write-Log "ERROR: MSI installer failed"
             exit 1
