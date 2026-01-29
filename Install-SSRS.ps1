@@ -16,7 +16,7 @@ $VerbosePreference = "Continue"
 $AppName            = "SQL Server Reporting Services"      
 $InstallerUrl       = "https://download.microsoft.com/download/8/3/2/832616ff-af64-42b5-a0b1-5eb07f71dec9/SQLServerReportingServices.exe"
 $InstallerPath      = "C:\Temp\SQLServerReportingServices.exe"   
-$SilentArgs         = "/quiet /norestart /IAcceptLicenseTerms REBOOT=ReallySuppress"      
+$SilentArgs         = "/quiet /norestart /IAcceptLicenseTerms /Edition=Dev"     
 $CreateShortcut     = $false
 $AppExecutablePath  = ""
     
@@ -91,7 +91,7 @@ try {
     # ------------------------------------------
     if ($InstallerPath -like "*.exe") {
         Write-Log "Running EXE installer for $AppName"
-        $process = Start-Process -FilePath $InstallerPath -ArgumentList $SilentArgs -Wait -PassThru
+        $process = Start-Process -FilePath $InstallerPath -ArgumentList $SilentArgs -Wait -PassThru -NoNewWindow
         Write-Log "EXE exit code: $($process.ExitCode)"
 
         if ($process.ExitCode -ne 0) {
