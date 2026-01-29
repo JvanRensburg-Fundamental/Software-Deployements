@@ -94,10 +94,18 @@ try {
         $process = Start-Process -FilePath $InstallerPath -ArgumentList $SilentArgs -Wait -PassThru -NoNewWindow
         Write-Log "EXE exit code: $($process.ExitCode)"
 
-        if ($process.ExitCode -ne 0) {
-            Write-Log "ERROR: EXE installer failed"
-            exit 1
+        # Normalize reboot-required success codes
+        if ($process.ExitCode -eq 3010 -or $process.ExitCode -eq 1641) {
+        Write-Log "Installer completed successfully and requires a reboot"
+        exit 0
         }
+
+        # Treat any other non-zero as failure
+        if ($process.ExitCode -ne 0) {
+        Write-Log "ERROR: EXE installer failed"
+        exit 1
+        }
+
     }
 
     # ------------------------------------------
