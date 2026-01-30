@@ -12,7 +12,7 @@ $VerbosePreference = "Continue"
 #  VARIABLES (update only these)
 # ------------------------------------------
 $AppName        = "SQLServer2025"
-$ZipUrl         = "https://safundavdstore.blob.core.windows.net/software/SQLServer2025.zip?sp=r&st=2026-01-30T19:41:33Z&se=2026-03-31T03:56:33Z&spr=https&sv=2024-11-04&sr=b&sig=Pqw9jJteNo73qovnze4yYPpwDiKAipgKAcF%2B14SHOus%3D"
+$ZipUrl         = "https://safundavdstore.blob.core.windows.net/software/SQLServer2025.zip?sp=r&st=2026-01-30T21:01:01Z&se=2026-03-31T05:16:01Z&spr=https&sv=2024-11-04&sr=b&sig=swAkALT4EZKlOefB4icvG6ssNJ7woDMssLTie5rZprk%3D"
 $ZipPath        = "C:\Temp\SQLServer2025.zip"
 $ExtractPath    = "C:\Temp\SQLServer2025"
 $ConfigFile     = "AVDSQL2025_Config.ini"
