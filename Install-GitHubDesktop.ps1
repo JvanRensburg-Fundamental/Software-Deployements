@@ -18,7 +18,7 @@ $InstallerUrl       = "https://central.github.com/deployments/desktop/desktop/la
 $InstallerPath      = "c:\Temp\GitHubDesktop-64.exe"
 $SilentArgs         = "/s"   
 $CreateShortcut     = $true
-$AppExecutablePath = "$env:LOCALAPPDATA\GitHubDesktop\app-3.5.4\GitHubDesktop.exe"
+$AppExecutablePath = "$env:LOCALAPPDATA\GitHubDesktop\GitHubDesktop.exe"
 
 # ------------------------------------------
 #  VALIDATE VARIABLES
