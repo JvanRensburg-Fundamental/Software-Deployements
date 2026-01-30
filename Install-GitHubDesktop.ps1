@@ -15,10 +15,10 @@ $VerbosePreference = "Continue"
 # ------------------------------------------
 $AppName            = "GitHub Desktop"
 $InstallerUrl       = "https://central.github.com/deployments/desktop/desktop/latest/win32?format=msi"  
-$InstallerPath      = "c:\Temp\GitHubDesktop-64.msi"
-$SilentArgs         = ""   
+$InstallerPath      = "c:\Temp\GitHubDesktop-64.exe"
+$SilentArgs         = "/s"   
 $CreateShortcut     = $true
-$AppExecutablePath = ""
+$AppExecutablePath = "$env:LOCALAPPDATA\GitHubDesktop\app-3.5.4\GitHubDesktop.exe"
 
 # ------------------------------------------
 #  VALIDATE VARIABLES
