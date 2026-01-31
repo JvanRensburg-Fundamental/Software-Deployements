@@ -16,7 +16,7 @@ $VerbosePreference = "Continue"
 $AppName            = "GitHub Desktop"
 $InstallerUrl       = "https://central.github.com/deployments/desktop/desktop/latest/win32"  
 $InstallerPath      = "c:\Temp\GitHubDesktop-64.exe"
-$SilentArgs         = "/s"
+$SilentArgs         = ""
 $CreateShortcut     = $false
 $AppExecutablePath = ""
 
@@ -70,6 +70,27 @@ try {
 
         Write-Log "Installer downloaded successfully"
     }
+
+    # ------------------------------------------
+    #  EXTRACT MSI FROM GITHUBDESKTOP-64.EXE
+    # ------------------------------------------
+    Write-Log "Extracting MSI from GitHubDesktop-64.exe"
+
+    $ExtractPath = "C:\Temp\GitHubDesktopExtract"
+    New-Item -ItemType Directory -Path $ExtractPath -Force | Out-Null
+
+    Start-Process -FilePath $InstallerPath -ArgumentList "/extract `"$ExtractPath`"" -Wait
+
+    $MsiFile = Get-ChildItem -Path $ExtractPath -Filter *.msi | Select-Object -First 1
+
+    if (-not $MsiFile) {
+        Write-Log "ERROR: Failed to extract MSI from GitHubDesktop-64.exe"
+        exit 1
+    }
+
+    Write-Log "MSI extracted successfully: $($MsiFile.FullName)"
+    # Replace installer path with MSI so the MSI block handles installation
+    $InstallerPath = $MsiFile.FullName
 
     # ------------------------------------------
     #  INSTALL MSI
