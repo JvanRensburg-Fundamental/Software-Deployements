@@ -76,7 +76,7 @@ try {
     # ------------------------------------------
         if ($InstallerPath -like "*.msi") {
         Write-Log "Running MSI installer for $AppName"
-        $process = Start-Process msiexec.exe -ArgumentList "/i `"$InstallerPath`" /qn /norestart ALLUSERS=1" -Wait -PassThru
+        $process = Start-Process msiexec.exe -ArgumentList "/i `"$InstallerPath`" /qn /norestart ALLUSERS=2" -Wait -PassThru
         Write-Log "MSI exit code: $($process.ExitCode)"
 
         if ($process.ExitCode -ne 0) {
