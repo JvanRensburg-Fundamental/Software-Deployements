@@ -12,7 +12,7 @@ $VerbosePreference = "Continue"
 #  VARIABLES (update only these)
 # ------------------------------------------
 $AppName        = "Developer Express"
-$ZipUrl         = ""
+$ZipUrl         = "https://safundavdstore.blob.core.windows.net/software/DevExpress-25.2.3.zip?sp=r&st=2026-02-05T12:58:02Z&se=2026-03-31T21:13:02Z&spr=https&sv=2024-11-04&sr=b&sig=wSFcHvAFInpeRgTCMkFBdYVZRsm2deZTweVCiNG1dO8%3D"
 $ZipPath        = "C:\Temp\DevExpress-25.2.3.zip"
 $ExtractPath    = "C:\Temp\DevExpress"
 $ConfigFile     = "AVDDevExpress_Config.ini"
