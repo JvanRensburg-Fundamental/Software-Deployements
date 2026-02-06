@@ -12,7 +12,7 @@ $VerbosePreference = "Continue"
 #  VARIABLES (update only these)
 # ------------------------------------------
 $AppName        = "VSStudio2026Pro"
-#$ZipUrl         = ""   # <-- Add your ZIP URL here
+$ZipUrl         = "https://safundavdstore.blob.core.windows.net/software/VSStudio2026Pro.zip?sp=r&st=2026-02-06T21:45:30Z&se=2026-02-08T06:00:30Z&spr=https&sv=2024-11-04&sr=b&sig=Ymgs5IIGf2%2BMD8htgOnRfP%2FdeOXMzYB9SSzp5p0EVmw%3D"   # <-- Add your ZIP URL here
 $ZipPath        = "C:\Temp\VSStudio2026Pro.zip"
 $ExtractPath    = "C:\Temp\VSStudio2026Pro"
 
@@ -43,13 +43,13 @@ try {
     #  DOWNLOAD VS MEDIA ZIP
     # ------------------------------------------
 
-    #  Write-Log "Downloading Visual Studio media from $ZipUrl"
-    #Invoke-WebRequest -Uri $ZipUrl -OutFile $ZipPath -UseBasicParsing
+    Write-Log "Downloading Visual Studio media from $ZipUrl"
+    Invoke-WebRequest -Uri $ZipUrl -OutFile $ZipPath -UseBasicParsing
 
-    #if (!(Test-Path $ZipPath)) {
-    #    Write-Log "ERROR: Visual Studio media ZIP failed to download"
-    #    exit 1
-    #}
+    if (!(Test-Path $ZipPath)) {
+        Write-Log "ERROR: Visual Studio media ZIP failed to download"
+        exit 1
+    }
 
     # Write-Log "Visual Studio media ZIP downloaded successfully"
 
