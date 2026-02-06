@@ -91,3 +91,25 @@ wsl --install --no-distribution 2>$null
 
 Write-Output "Installing Ubuntu..."
 wsl --install -d Ubuntu 2>$null
+
+
+## Create PSScript Directory for Config Files ##
+    
+$tempDir = "C:\Temp"
+$configDir = "C:\PSScripts"
+if (!(Test-Path $tempDir)) { New-Item -ItemType Directory -Path $tempDir -Force }
+if (!(Test-Path $configDir)) { New-Item -ItemType Directory -Path $configDir -Force }
+
+    # Setting up DevExpress 23.1.4 installation
+    $DEVersion = "25.2.3"
+    $installerNetworkPath = "\\blue\Software\Paid For\Developer Express\DevExpress $($DEVersion)\DevExpressComponentsBundleSetup-$($DEVersion).exe"
+    $installerLocalPath = "C:\TEMP\DevExpressComponentsBundleSetup-$($DEVersion).exe"
+    $DEconfigPath = "C:\PSScripts\AVDDevExpress_Config.ini"
+    
+    # Copy DevExpress installer from network location to local machine
+    Copy-Item -Path $installerNetworkPath -Destination $installerLocalPath -Force
+
+    # Start the DevExpress installation process with the configuration file
+    Start-Process -Wait -FilePath $installerLocalPath -ArgumentList "/quiet", "/acceptEula=1", "/installMode=registered", "/configFile=`"$DEconfigPath`"" -PassThru -NoNewWindow
+
+

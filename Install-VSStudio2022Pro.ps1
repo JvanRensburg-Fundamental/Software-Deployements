@@ -20,3 +20,6 @@ Start-Process -FilePath $output -ArgumentList "--quiet --wait --norestart" -Wait
 
 # Cleanup
 Remove-Item -Path $output -Force
+
+
+
