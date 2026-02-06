@@ -138,7 +138,7 @@ try {
 
     if (Test-Path $InstallerPath) {
         Write-Log "Cleaning up installer"
-        Remove-Item -Path $InstallerPath -Force
+        Remove-Item $InstallerPath -Force
     }
 
     Write-Log "=== Installation completed successfully for $AppName ==="
