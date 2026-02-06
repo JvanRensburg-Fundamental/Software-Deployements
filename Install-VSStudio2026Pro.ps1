@@ -90,7 +90,7 @@ try {
     $SetupExe = Join-Path $ExtractPath "VisualStudioSetup.exe"
 
     # Visual Studio silent install syntax
-    $Arguments = "--quiet --wait --norestart --noweb --config `"$ConfigPath`""
+    $Arguments = "--quiet --wait --norestart --config `"$ConfigPath`""
 
     Write-Log "Running Visual Studio setup"
     Write-Log "Command: VisualStudioSetup.exe $Arguments"
