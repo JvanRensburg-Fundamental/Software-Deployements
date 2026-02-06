@@ -12,7 +12,7 @@ $VerbosePreference = "Continue"
 #  VARIABLES (update only these)
 # ------------------------------------------
 $AppName        = "VSStudio2026Pro"
-$ZipUrl         = ""   # <-- Add your ZIP URL here
+#$ZipUrl         = ""   # <-- Add your ZIP URL here
 $ZipPath        = "C:\Temp\VSStudio2026Pro.zip"
 $ExtractPath    = "C:\Temp\VSStudio2026Pro"
 $ConfigFile     = "AVDVS2026_ConfigurationFile.json"
