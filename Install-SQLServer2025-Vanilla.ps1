@@ -99,6 +99,9 @@ try {
     Write-Log "Cleaning up ZIP"
     Remove-Item $ZipPath -Force
 
+    Write-Log "Cleaning up extracted media"
+    Remove-Item $ExtractPath -Recurse -Force
+
     Write-Log "=== SQL Server 2025 installation completed successfully ==="
     exit 0
 }
