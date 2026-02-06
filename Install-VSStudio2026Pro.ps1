@@ -15,7 +15,6 @@ $AppName        = "VSStudio2026Pro"
 #$ZipUrl         = ""   # <-- Add your ZIP URL here
 $ZipPath        = "C:\Temp\VSStudio2026Pro.zip"
 $ExtractPath    = "C:\Temp\VSStudio2026Pro"
-$ConfigFile     = "AVDVS2026_ConfigurationFile.json"
 
 # ------------------------------------------
 #  PREPARE LOGGING
@@ -73,24 +72,12 @@ try {
     Write-Log "Visual Studio media extracted successfully"
 
     # ------------------------------------------
-    #  VALIDATE CONFIG FILE
-    # ------------------------------------------
-    $ConfigPath = Join-Path $ExtractPath $ConfigFile
-
-    if (!(Test-Path $ConfigPath)) {
-        Write-Log "ERROR: Visual Studio configuration file not found: $ConfigPath"
-        exit 1
-    }
-
-    Write-Log "Using Visual Studio configuration file: $ConfigPath"
-
-    # ------------------------------------------
     #  RUN VISUAL STUDIO SETUP
     # ------------------------------------------
     $SetupExe = Join-Path $ExtractPath "VisualStudioSetup.exe"
 
     # Visual Studio silent install syntax
-    $Arguments = "--quiet --wait --norestart --config `"$ConfigPath`""
+    $Arguments = "--quiet --wait --norestart"
 
     Write-Log "Running Visual Studio setup"
     Write-Log "Command: VisualStudioSetup.exe $Arguments"
